@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Navbar from './components/Navbar';
 import uuid from 'uuid';
 import ContactCard from './components/ContactCard';
-import Input from './components/Input';
+import AddContactForm from './components/AddContactForm';
 
 /*
   Contact Manager
@@ -72,6 +72,16 @@ export default class App extends Component {
     this.setState({ route: route });
   };
 
+  onSubmit = newContact => {
+    //const newContacts = this.state.contacts.concat([newContact]);
+
+    const newContacts = this.state.contacts;
+    newContacts.push(newContact);
+
+    this.setState({ contacts: newContacts });
+    this.switchRouteParent('viewContacts');
+  };
+
   render() {
     let element;
 
@@ -85,6 +95,9 @@ export default class App extends Component {
           </div>
         );
         break;
+      case 'addContact':
+        element = <AddContactForm onSubmitParent={this.onSubmit} />;
+        break;
       default:
         element = <div>404 Component not found</div>;
     }
@@ -93,12 +106,6 @@ export default class App extends Component {
       <div>
         <Navbar switchRouteChild={this.switchRouteParent} />
         <div className="container">{element}</div>
-        <Input
-          label="TestLabel"
-          type="text"
-          placeholder="placeholder Test"
-          value="Test Value"
-        />
       </div>
     );
   }

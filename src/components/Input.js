@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Input = props => {
-  const { label, type, onChange, value, placeholder } = props;
+  const { label, type, onChange, value, placeholder, name } = props;
 
   return (
     <div>
@@ -13,6 +13,7 @@ const Input = props => {
           onChange={onChange}
           value={value}
           placeholder={placeholder}
+          name={name}
         />
       </div>
     </div>
@@ -24,7 +25,8 @@ Input.propTypes = {
   type: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   value: PropTypes.string.isRequired,
-  placeholder: PropTypes.string.isRequired
+  placeholder: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired
 };
 
 Input.defaultProps = {

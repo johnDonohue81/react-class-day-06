@@ -68,6 +68,8 @@ export default class ContactCard extends Component {
             <p>
               <strong>Notes:</strong> {contact.notes}
             </p>
+            <button className="btn btn-warning" onClick={this.props.goToEdit.bind(this, contact)}>Update Contact</button>
+            <button className="btn btn-danger" onClick={this.props.deleteContact.bind(this, contact)}>Delete</button>
           </div>
         ) : null}
       </div>
@@ -76,5 +78,7 @@ export default class ContactCard extends Component {
 }
 
 ContactCard.propTypes = {
-  contact: PropTypes.object.isRequired
+  contact: PropTypes.object.isRequired,
+  goToEdit: PropTypes.func,
+  deleteContact: PropTypes.func
 };

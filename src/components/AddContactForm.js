@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Input from './Input';
+import PropTypes from 'prop-types'
+
 
 class AddContactForm extends Component {
   constructor(props) {
@@ -78,5 +80,9 @@ class AddContactForm extends Component {
     );
   }
 }
+
+AddContactForm.propTypes = {
+  onSubmitParent: PropTypes.func.isRequired
+};
 
 export default AddContactForm;

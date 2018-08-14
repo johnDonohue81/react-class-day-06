@@ -3,6 +3,7 @@ import Navbar from './components/Navbar';
 import uuid from 'uuid';
 import ContactCard from './components/ContactCard';
 import AddContactForm from './components/AddContactForm';
+import AddEditForm from './components/AddEditForm';
 
 /*
   Contact Manager
@@ -82,6 +83,52 @@ export default class App extends Component {
     this.switchRouteParent('viewContacts');
   };
 
+  onEditSubmit = updateContact => {
+    
+    // find item to update
+
+    let selectContactIndex = this.state.contacts.findIndex(contact => contact.id === updateContact.id) ; 
+
+    // for( let i = 0; i < this.state.contacts.length; i++) {
+    //   if (updateContact.id === this.state.contacts[i].id) {
+    //     selectContactIndex = i;
+    //   }
+    // }
+
+     // replace them
+     const contactsArry = this.state.contacts 
+
+     contactsArry[selectContactIndex] = updateContact;
+
+
+    // update state
+
+    this.setState({ contacts: contactsArry});
+    this.switchRouteParent('viewContacts');
+  } // end onEditSubmit
+
+  goToEdit = (contact) => {
+   
+    this.setState({currentContact : contact});
+
+
+
+    // Route to AddEditForm
+    this.switchRouteParent('AddEditForm');
+  }
+
+  deleteContact = (contact) => {
+    const newArray = this.state.contacts;
+    let selectContactIndex ; 
+    for( let i = 0; i < this.state.contacts.length; i++) {
+      if (contact.id === this.state.contacts[i].id) {
+        selectContactIndex = i;
+      }
+    }
+    newArray.splice(selectContactIndex, 1);
+    this.setState({contacts: newArray});
+  }
+
   render() {
     let element;
 
@@ -90,7 +137,7 @@ export default class App extends Component {
         element = (
           <div>
             {this.state.contacts.map(contact => (
-              <ContactCard contact={contact} key={contact.id} />
+              <ContactCard contact={contact} key={contact.id} goToEdit={this.goToEdit} deleteContact={this.deleteContact}/>
             ))}
           </div>
         );
@@ -98,9 +145,13 @@ export default class App extends Component {
       case 'addContact':
         element = <AddContactForm onSubmitParent={this.onSubmit} />;
         break;
+        case 'AddEditForm':
+        element = <AddEditForm onSubmitParent={this.onEditSubmit} contact={this.state.currentContact}/>;
+        break;
       default:
         element = <div>404 Component not found</div>;
     }
+
 
     return (
       <div>

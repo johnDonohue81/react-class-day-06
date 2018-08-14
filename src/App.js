@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Navbar from './components/Navbar';
 import uuid from 'uuid';
+import ContactCard from './components/ContactCard';
 
 /*
   Contact Manager
@@ -75,7 +76,11 @@ export default class App extends Component {
 
     switch (this.state.route) {
       case 'viewContacts':
-        element = <div>Contact View</div>;
+        element = (
+          <div>
+            <ContactCard contact={this.state.contacts[0]} />
+          </div>
+        );
         break;
       default:
         element = <div>404 Component not found</div>;

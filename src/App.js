@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Navbar from './components/Navbar';
 import uuid from 'uuid';
 import ContactCard from './components/ContactCard';
+import Input from './components/Input';
 
 /*
   Contact Manager
@@ -92,6 +93,12 @@ export default class App extends Component {
       <div>
         <Navbar switchRouteChild={this.switchRouteParent} />
         <div className="container">{element}</div>
+        <Input
+          label="TestLabel"
+          type="text"
+          placeholder="placeholder Test"
+          value="Test Value"
+        />
       </div>
     );
   }

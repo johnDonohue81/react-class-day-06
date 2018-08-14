@@ -78,7 +78,9 @@ export default class App extends Component {
       case 'viewContacts':
         element = (
           <div>
-            <ContactCard contact={this.state.contacts[0]} />
+            {this.state.contacts.map(contact => (
+              <ContactCard contact={contact} key={contact.id} />
+            ))}
           </div>
         );
         break;

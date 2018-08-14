@@ -10,9 +10,17 @@ export default class ContactCard extends Component {
     super(props);
 
     this.state = {
-      visible: true
+      visible: false
     };
   }
+
+  toggleDetails = () => {
+    // this.state.visible
+    //   ? this.setState({ visible: false })
+    //   : this.setState({ visible: true });
+
+    this.setState({ visible: !this.state.visible });
+  };
 
   render() {
     const { contact } = this.props;
@@ -40,7 +48,7 @@ export default class ContactCard extends Component {
 
     return (
       <div className="card">
-        <div className="card-header">
+        <div className="card-header" onClick={this.toggleDetails}>
           <h3>{contact.name}</h3>
           <h4>
             <em>- {contact.company}</em>

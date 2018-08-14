@@ -11,6 +11,7 @@ export default class App extends Component {
   }
 
   switchRouteParent = route => {
+    console.log('in switchRoute');
     this.setState({ route: route });
   };
 
@@ -24,7 +25,7 @@ export default class App extends Component {
 
     return (
       <div>
-        <Navbar />
+        <Navbar switchRouteChild={this.switchRouteParent} />
         <div className="container">{element}</div>
       </div>
     );
